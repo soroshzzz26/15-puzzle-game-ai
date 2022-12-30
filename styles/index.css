@@ -19,7 +19,6 @@ html {
 
 main {
   padding: 50px 24px;
-
 }
 
 /* desc section */
@@ -66,4 +65,22 @@ main {
   justify-content: center;
   align-items: center;
   font-size: 32px;
+}
+
+.item-box {
+  max-height: 100px;
+  aspect-ratio: 1 / 1;
+  border: 1px solid #1c1f23;
+  background-color: #d6dfe4;
+  border-radius: 2px;
+  margin: 5px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+}
+
+.item-box-empty {
+  max-height: 100px;
+  aspect-ratio: 1 / 1;
 }
