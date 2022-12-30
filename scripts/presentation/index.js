@@ -22,6 +22,57 @@ const ex2 = [
 
 var ArrToProcess = ex1
 
+const onRadioChange = (val) => {
+  switch (val) {
+    case 0:
+      InitBoard(ex1)
+      break
+    case 1:
+      InitBoard(ex2)
+      break
+
+    default:
+      InitBoard(ex1)
+      break
+  }
+}
+
+const _toggleBtn = (state) => {
+  if (state) {
+    solveDfsBtn.classList.add('disabled')
+    solveABtn.classList.add('disabled')
+  } else {
+    solveDfsBtn.classList.remove('disabled')
+    solveABtn.classList.remove('disabled')
+  }
+}
+
+const _solveDfs = (arr) => {
+  _toggleBtn()
+  console.log(arr)
+  console.log(DFS(arr))
+}
+
+const _solveA = (arr) => {
+  _toggleBtn()
+  console.log(arr)
+  console.log(a_star(arr))
+}
+
+const SolveBoard = (type) => {
+  switch (type) {
+    case 'dfs':
+      _solveDfs(ArrToProcess)
+      break
+    case 'a*':
+      _solveA(ArrToProcess)
+      break
+    default:
+      _solveDfs(ArrToProcess)
+      break
+  }
+}
+
 const InitBoard = (boardArr) => {
   let _boardArr = boardArr.flat(1)
 
