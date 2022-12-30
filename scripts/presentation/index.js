@@ -26,13 +26,16 @@ const onRadioChange = (val) => {
   switch (val) {
     case 0:
       InitBoard(ex1)
+      stepTxt.innerHTML = `Step: ${0}`
       break
     case 1:
       InitBoard(ex2)
+      stepTxt.innerHTML = `Step: ${0}`
       break
 
     default:
       InitBoard(ex1)
+      stepTxt.innerHTML = `Step: ${0}`
       break
   }
 }
