@@ -6,7 +6,7 @@ it also could helpful to any students that studying in this field so we decided 
 if you find a bug or you want to improve the code feel free and open PR.
 
 live example could be found on:
-https://google.com
+https://15-puzzle-game-ai.netlify.app/
 
 
 ## Screenshots
