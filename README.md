@@ -1,7 +1,7 @@
 
 # 15 Puzzle Game AI
 
-this project is the 15 puzzle game solution with some artificial intelligence(DFS, A*,...) for AI course kharazmi university
+this project is the 15 puzzle game solution with some artificial intelligence algorithms(DFS, A*,...) for AI course kharazmi university
 it also could helpful to any students that studying in this field so we decided to publish this project
 if you find a bug or you want to improve the code feel free and open PR.
 
