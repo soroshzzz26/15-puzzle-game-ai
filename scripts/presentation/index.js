@@ -50,10 +50,9 @@ const _toggleBtn = (state) => {
   }
 }
 
-const _solveDfs = (arr) => {
+const _solveDfs = async (arr) => {
   _toggleBtn()
-  console.log(arr)
-  console.log(DFS(arr))
+  const response = await DFS(arr)
 }
 
 const _solveA = (arr) => {
