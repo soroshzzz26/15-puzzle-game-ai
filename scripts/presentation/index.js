@@ -51,14 +51,17 @@ const _toggleBtn = (state) => {
 }
 
 const _solveDfs = async (arr) => {
+  loadingOverlay.activate()
   _toggleBtn()
-  const response = await DFS(arr)
+  const resp = await DFS(arr)
+  loadingOverlay.cancelAll()
 }
 
-const _solveA = (arr) => {
+const _solveA = async (arr) => {
+  loadingOverlay.activate()
   _toggleBtn()
-  console.log(arr)
-  console.log(a_star(arr))
+  const resp = await a_star(arr)
+  loadingOverlay.cancelAll()
 }
 
 const SolveBoard = (type) => {
