@@ -185,3 +185,62 @@ function a_star(initial_state) {
     reject({ found: false, board_list: [] })
   })
 }
+
+function hill_climbing(initial_state, iterations=200) {
+    let iter = 0;
+    let current_state = JSON.parse(JSON.stringify(initial_state));
+    let board_list = [];
+    let z_i = -1, z_j = -1;
+
+    for (let i = 0; i < 4; ++i) {
+        for (let j = 0; j < 4; ++j) {
+
+            if (initial_state[i][j] == 0) {
+                z_i = i;
+                z_j = j;
+                break;
+            }
+        }
+    }
+    let found = false;
+    while (iter < iterations) {
+        board_list.push(current_state);
+        if (compute_heuristic(current_state) == 0) {
+            found = true;
+            break;
+        }
+  
+
+        let min_h = 999999999;
+        let min_state = current_state;
+        let min_i = -1, min_j = -1;
+
+        for (let d = 0; d < 4; ++d) {
+            let new_i = dx[d] + z_i, new_j = dy[d] + z_j;
+
+            if (0 <= new_i && new_i < 4 && 0 <= new_j && new_j < 4) {
+
+                const newstate = JSON.parse(JSON.stringify(current_state));
+                newstate[new_i][new_j] = current_state[z_i][z_j]
+                newstate[z_i][z_j] = current_state[new_i][new_j]
+                
+                let new_h = compute_heuristic(newstate);
+              
+                if (min_h > new_h) {
+                    min_h = new_h;
+                    min_i = new_i;
+                    min_j = new_j;
+                    min_state = JSON.parse(JSON.stringify(newstate));
+                }
+            }
+        }
+
+        current_state = JSON.parse(JSON.stringify(min_state));
+        z_i = min_i;
+        z_j = min_j;
+        
+        iter++;
+    }
+
+    return {found: found, board_list: board_list};
+}
