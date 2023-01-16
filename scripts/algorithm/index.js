@@ -56,17 +56,11 @@ function DFS(initial_state) {
     if (dfs_rec({ state: initial_state, z_i: init_z_i, z_j: init_z_j }, 0)) {
       let board_list = []
 
-      let x = JSON.parse(JSON.stringify(initial_state))
+      let x = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]];
       while (x != -1) {
         board_list.push(x)
         x = dfs_previous[x]
       }
-      board_list.push([
-        [1, 2, 3, 4],
-        [5, 6, 7, 8],
-        [9, 10, 11, 12],
-        [13, 14, 15, 0],
-      ])
 
       resolve({ found: true, board_list: board_list })
     }
@@ -167,18 +161,12 @@ function a_star(initial_state) {
     if (found) {
       let board_list = []
 
-      let x = JSON.parse(JSON.stringify(initial_state))
+      let x = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]];
       while (x != -1) {
         board_list.push(x)
         x = previous[x]
       }
-      board_list.push([
-        [1, 2, 3, 4],
-        [5, 6, 7, 8],
-        [9, 10, 11, 12],
-        [13, 14, 15, 0],
-      ])
-
+      
       resolve({ found: true, board_list: board_list })
     }
 
