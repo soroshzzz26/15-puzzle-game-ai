@@ -56,7 +56,12 @@ function DFS(initial_state) {
     if (dfs_rec({ state: initial_state, z_i: init_z_i, z_j: init_z_j }, 0)) {
       let board_list = []
 
-      let x = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]];
+      let x = [
+        [1, 2, 3, 4],
+        [5, 6, 7, 8],
+        [9, 10, 11, 12],
+        [13, 14, 15, 0],
+      ]
       while (x != -1) {
         board_list.push(x)
         x = dfs_previous[x]
@@ -161,12 +166,17 @@ function a_star(initial_state) {
     if (found) {
       let board_list = []
 
-      let x = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]];
+      let x = [
+        [1, 2, 3, 4],
+        [5, 6, 7, 8],
+        [9, 10, 11, 12],
+        [13, 14, 15, 0],
+      ]
       while (x != -1) {
         board_list.push(x)
         x = previous[x]
       }
-      
+
       resolve({ found: true, board_list: board_list })
     }
 
@@ -174,61 +184,67 @@ function a_star(initial_state) {
   })
 }
 
-function hill_climbing(initial_state, iterations=200) {
-    let iter = 0;
-    let current_state = JSON.parse(JSON.stringify(initial_state));
-    let board_list = [];
-    let z_i = -1, z_j = -1;
+function hill_climbing(initial_state, iterations = 200) {
+  return new Promise((resolve, reject) => {
+    let iter = 0
+    let current_state = JSON.parse(JSON.stringify(initial_state))
+    let board_list = []
+    let z_i = -1,
+      z_j = -1
 
     for (let i = 0; i < 4; ++i) {
-        for (let j = 0; j < 4; ++j) {
-
-            if (initial_state[i][j] == 0) {
-                z_i = i;
-                z_j = j;
-                break;
-            }
+      for (let j = 0; j < 4; ++j) {
+        if (initial_state[i][j] == 0) {
+          z_i = i
+          z_j = j
+          break
         }
+      }
     }
-    let found = false;
+    let found = false
     while (iter < iterations) {
-        board_list.push(current_state);
-        if (compute_heuristic(current_state) == 0) {
-            found = true;
-            break;
+      board_list.push(current_state)
+      if (compute_heuristic(current_state) == 0) {
+        found = true
+        break
+      }
+
+      let min_h = 999999999
+      let min_state = current_state
+      let min_i = -1,
+        min_j = -1
+
+      for (let d = 0; d < 4; ++d) {
+        let new_i = dx[d] + z_i,
+          new_j = dy[d] + z_j
+
+        if (0 <= new_i && new_i < 4 && 0 <= new_j && new_j < 4) {
+          const newstate = JSON.parse(JSON.stringify(current_state))
+          newstate[new_i][new_j] = current_state[z_i][z_j]
+          newstate[z_i][z_j] = current_state[new_i][new_j]
+
+          let new_h = compute_heuristic(newstate)
+
+          if (min_h > new_h) {
+            min_h = new_h
+            min_i = new_i
+            min_j = new_j
+            min_state = JSON.parse(JSON.stringify(newstate))
+          }
         }
-  
+      }
 
-        let min_h = 999999999;
-        let min_state = current_state;
-        let min_i = -1, min_j = -1;
+      current_state = JSON.parse(JSON.stringify(min_state))
+      z_i = min_i
+      z_j = min_j
 
-        for (let d = 0; d < 4; ++d) {
-            let new_i = dx[d] + z_i, new_j = dy[d] + z_j;
-
-            if (0 <= new_i && new_i < 4 && 0 <= new_j && new_j < 4) {
-
-                const newstate = JSON.parse(JSON.stringify(current_state));
-                newstate[new_i][new_j] = current_state[z_i][z_j]
-                newstate[z_i][z_j] = current_state[new_i][new_j]
-                
-                let new_h = compute_heuristic(newstate);
-              
-                if (min_h > new_h) {
-                    min_h = new_h;
-                    min_i = new_i;
-                    min_j = new_j;
-                    min_state = JSON.parse(JSON.stringify(newstate));
-                }
-            }
-        }
-
-        current_state = JSON.parse(JSON.stringify(min_state));
-        z_i = min_i;
-        z_j = min_j;
-        
-        iter++;
+      iter++
     }
 
-    return {found: found, board_list: board_list};
+    if (found) {
+      resolve({ found: true, board_list: board_list })
+    }
+
+    reject({ found: false, board_list: [] })
+  })
 }
