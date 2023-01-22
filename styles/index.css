@@ -84,3 +84,9 @@ main {
   max-height: 100px;
   aspect-ratio: 1 / 1;
 }
+
+@media only screen and (max-width: 992px) {
+  .desc-con {
+    padding-left: 0;
+  }
+}
