@@ -5,7 +5,7 @@ const SOLVED_STATE = [
     [13, 14, 15, 0],
 ];
 
-function AStar(initialState) {
+function aStar(initialState) {
     return new Promise((resolve, reject) => {
         let distance = {};
         let queue = new Heap((o1, o2) => {
@@ -112,7 +112,7 @@ function dfsRec(state, depth) {
     return false;
 }
 
-function DFS(initialState) {
+function dfs(initialState) {
     return new Promise((resolve, reject) => {
         dfsPrevious = {};
         dfsPrevious[initialState] = -1;
