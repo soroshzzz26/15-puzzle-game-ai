@@ -79,7 +79,7 @@ const _solveHill = (arr) => {
   setTimeout(async () => {
     try {
       const resp = await hillClimbing(arr)
-      let board = resp.board_list.reverse()
+      let board = resp.board_list
       loadingOverlay.cancelAll()
       _animateBoard(board)
     } catch (error) {
@@ -130,5 +130,4 @@ const InitBoard = (boardArr) => {
   })
 
   BoxContainer.children[0].replaceChildren(..._boardElems)
-  // ArrToProcess = boardArr
 }
