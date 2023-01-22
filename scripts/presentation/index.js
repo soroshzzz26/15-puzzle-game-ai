@@ -16,24 +16,6 @@ const ex1 = [
 ]
 var ArrToProcess = ex1
 
-// const onRadioChange = (val) => {
-//   switch (val) {
-//     case 0:
-//       InitBoard(ex1)
-//       stepTxt.innerHTML = `Step: ${0}`
-//       break
-//     case 1:
-//       InitBoard(ex2)
-//       stepTxt.innerHTML = `Step: ${0}`
-//       break
-
-//     default:
-//       InitBoard(ex1)
-//       stepTxt.innerHTML = `Step: ${0}`
-//       break
-//   }
-// }
-
 const _toggleBtn = (state) => {
   if (state) {
     solveDfsBtn.classList.add('disabled')
@@ -145,5 +127,4 @@ const InitBoard = (boardArr) => {
   })
 
   BoxContainer.children[0].replaceChildren(..._boardElems)
-  // ArrToProcess = boardArr
 }
