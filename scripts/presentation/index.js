@@ -9,30 +9,12 @@ const stepTxt = document.querySelector('#step-text')
 const BoxContainer = document.querySelector('.box-con')
 
 const ex1 = [
-  [1, 2, 3, 4],
-  [5, 6, 7, 8],
-  [9, 10, 11, 12],
-  [13, 14, 15, 0],
+  [5, 1, 2, 4],
+  [9, 7, 3, 8],
+  [0, 6, 11, 12],
+  [13, 10, 14, 15],
 ]
 var ArrToProcess = ex1
-
-// const onRadioChange = (val) => {
-//   switch (val) {
-//     case 0:
-//       InitBoard(ex1)
-//       stepTxt.innerHTML = `Step: ${0}`
-//       break
-//     case 1:
-//       InitBoard(ex2)
-//       stepTxt.innerHTML = `Step: ${0}`
-//       break
-
-//     default:
-//       InitBoard(ex1)
-//       stepTxt.innerHTML = `Step: ${0}`
-//       break
-//   }
-// }
 
 const _toggleBtn = (state) => {
   if (state) {
@@ -51,6 +33,7 @@ const _animateBoard = (board) => {
   const interval = setInterval(() => {
     counter += 1
     InitBoard(board[counter])
+    stepTxt.innerHTML = `Step: ${counter}`
     if (counter == board.length - 1) {
       clearInterval(interval)
       _toggleBtn()
@@ -63,7 +46,7 @@ const _solveDfs = async (arr) => {
   _toggleBtn(true)
   setTimeout(async () => {
     try {
-      const resp = await DFS(arr)
+      const resp = await dfs(arr)
       let board = resp.board_list.reverse()
       loadingOverlay.cancelAll()
       _animateBoard(board)
@@ -79,7 +62,7 @@ const _solveA = (arr) => {
   _toggleBtn(true)
   setTimeout(async () => {
     try {
-      const resp = await a_star(arr)
+      const resp = await aStar(arr)
       let board = resp.board_list.reverse()
       loadingOverlay.cancelAll()
       _animateBoard(board)
@@ -95,7 +78,7 @@ const _solveHill = (arr) => {
   _toggleBtn(true)
   setTimeout(async () => {
     try {
-      const resp = await hill_climbing(arr)
+      const resp = await hillClimbing(arr)
       let board = resp.board_list.reverse()
       loadingOverlay.cancelAll()
       _animateBoard(board)
@@ -107,6 +90,8 @@ const _solveHill = (arr) => {
 }
 
 const SolveBoard = (type) => {
+  InitBoard(ArrToProcess)
+  stepTxt.innerHTML = 'Step: 0'
   switch (type) {
     case 'dfs':
       _solveDfs(ArrToProcess)
