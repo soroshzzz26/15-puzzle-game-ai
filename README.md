@@ -11,7 +11,7 @@ https://15-puzzle-game-ai.netlify.app/
 
 ## Screenshots
 
-![Project Screenshot](https://i.ibb.co/T4M22yy/73c460ef-1cce-489d-88e0-6ce1536fd477.jpg)
+![Project Screenshot](https://i.ibb.co/xGnsbWn/Screen-Shot-2023-01-22-at-18-26-25.png)
 
 
 ## Run Locally
