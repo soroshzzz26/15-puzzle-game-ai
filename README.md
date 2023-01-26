@@ -42,5 +42,5 @@ https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
 
 ## Change example
 ```bash
-  change 2x2 array in presentation layer script
+change 2x2 array in presentation layer script
 ```
